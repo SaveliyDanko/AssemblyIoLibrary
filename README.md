@@ -1,55 +1,13 @@
-# Assignment 1: Input/Output library in assembly
----
-Лабораторная работа 1: библиотека ввода-вывода на Assembler
+**Project Description:**
 
+The project involves the creation of an input/output (I/O) library using Assembly language. The primary goal is to develop efficient and low-level I/O operations that can handle various tasks like reading from and writing to different data streams. This library will be designed to provide high performance and flexibility, leveraging the power of Assembly for direct hardware communication.
 
-Реализуйте библиотеку процедур, которые будут выполнять простые действия со строками, числами и их текстовыми представлениями.
+To ensure the correctness and functionality of the I/O library, it will be thoroughly tested using Python. Python will act as a higher-level testing framework, allowing us to automate and validate the I/O operations provided by the Assembly library through well-structured test cases.
 
-# Подготовка
+This project will include:
+- Designing and implementing the I/O library in Assembly language.
+- Handling input/output operations like reading from files, standard input, and output streams.
+- Optimizing the library for performance and reliability.
+- Writing comprehensive test cases in Python to ensure that the library behaves as expected under various conditions.
 
-* Прочитайте первые две главы "Low-level programming: C, assembly and program execution".
-
-* Ознакомьтесь с [документацией на следующие инструкции](https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2024/main/-/blob/master/docs/intel-manual.pdf) и [Документацией по Linux ABI](https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2024/main/-/blob/master/docs/x86_64-abi-0.99.pdf).
-
-  - `xor`
-  - `jmp`, `ja` и другими командами условного перехода
-  - `cmp`
-  - `mov`
-  - `inc`, `dec`
-  - `add`, `imul`, `mul`, `sub`, `idiv`, `div`
-  - `neg`
-  - `call`, `ret`
-  - `push`, `pop`
-  
-  Документация &mdash; огромный документ. В просмотрщике PDF файлов найдите панель с оглавлением документа; там ищите второй том "Instruction Set Reference", где для каждой инструкции есть отдельная страничка.
-
-![](./img/outline.png) 
-
-
-* Прочитайте документацию на системный вызов `read` с помощью `man`. Его номер (который кладётся в `rax`) 0. Информацию о регистрах, используемых для передачи параметров в системные вызовы можно найти в [таблице](https://gitlab.se.ifmo.ru/programming-languages/cse-programming-languages-fall-2024/main/-/blob/main/docs/system-calls.md).
-
-# Написание
-
-- Впишите в `lib.asm` код вместо заглушек функций. По возможности переиспользуйте уже реализованные функции.
-- Используйте `test.py` чтобы протестировать работу. 
-
-Скрипт `test.py` будет генерировать набор исполняемых файлов с тестами для каждой функции, вы можете отладить их по-отделенности; также см. Appendix A в "Low-level programming: C, assembly and program execution". При выполнении тестов проверяется соответствие кода соглашениям о вызовах и выравнивание стека кратно 16 перед всеми вызовами `call`.
- 
-# Список распространённых ошибок
-
-- Для строки размером `n` байт необходимы `n+1` байт из-за нуль-терминатора.
-- Метки функций должны быть глобальными, остальные &mdash; локальными.
-- Регистры не хранят ноль "по умолчанию".
-- Если вы используете callee-saved регистры, вы должны сохранить их значения.
-- Если вы используете caller-saved регистры, вы должны сохранить их значения перед `call` и затем восстанавливать.
-- Не используйте буферы в секции `.data`. Вместо этого аллоцируйте место в стеке, уменьшая значение `rsp`.
-- Функции принимают аргументы в `rdi`, `rsi`, `rdx`, `rcx`, `r8` и `r9`.
-- Не выводите числа символ за символом. Сформируйте строку в памяти и вызовите `print_string`.
-- Проверьте, что `parse_int` и `parse_uint` корректно устанавливают `rdx` (очень важно для следующего задания)
-- Проверьте, что функции `parse_int`, `parse_uint` и `read_word` правильно работают когда ввод завершается с помощью `Ctrl-D`.
-- При использовании стека надо не забывать уменшать `rsp`.
-- Перед каждым вызовом `call` необходимо выравнивать стек кратно 16.
-- Вызовы `syscall` могут изменить значения регистров `rax`, `rcx` и `r11`.
-- Обратные кавычки позволяют использовать специальные символы в С-стиле (`\n`, `\t`).
-
-Код решения занимает порядка 250 строк.
+By integrating Python as a testing tool, we will combine the low-level efficiency of Assembly with the simplicity and flexibility of Python, creating a robust and well-tested library for future applications.
